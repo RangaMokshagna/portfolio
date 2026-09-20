@@ -16,20 +16,13 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 :root {
   /* Background — edit these to change the entire palette in one place */
-  --bg-base: #F4F5F8;
+  --bg-base: #F1F3F7; /* Pearl */
   --glow-1: rgba(147, 167, 215, 0.12);   /* pale blue, upper-left  */
   --glow-2: rgba(167, 149, 200, 0.10);   /* faint lilac, lower-right */
   --bg: var(--bg-base);
 
-  --text-primary: #1A1A2E;
+  --text-primary: #1A1A2E; /* Near-black */
   --text-secondary: #5A5A7A;
-
-  /* Gold accent — light mode (deeper amber for readability) */
-  --accent: #B7791F;
-  --accent-soft: #D9A441;
-  --accent-deep: #8B5A10;
-  --accent-glow: rgba(183, 121, 31, 0.15);
-  --accent-text: #1A1405;
 
   /* Glass design tokens */
   --glass-bg: rgba(255, 255, 255, 0.55);
@@ -46,6 +39,15 @@
   --glass-shadow-float: 0 8px 24px -8px rgba(20, 30, 80, 0.12);
   --glass-text-shadow: none;
 
+  /* Droplet specific (light mode) */
+  --droplet-bg: rgba(255, 255, 255, 0.5);
+  --droplet-border-bright: rgba(255, 255, 255, 0.9);
+  --droplet-border-dim: rgba(255, 255, 255, 0.2);
+  --droplet-highlight: rgba(255, 255, 255, 0.6);
+  --droplet-shadow-inner: inset 0 2px 4px rgba(255, 255, 255, 0.5);
+  --droplet-shadow-outer: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+  --droplet-caustic: inset 0 -4px 10px rgba(255, 255, 255, 0.3);
+
   /* Nav bubble (nested inside navbar — NO backdrop-filter) */
   --bubble-bg: rgba(0, 0, 0, 0.05);
   --bubble-bg-active: rgba(0, 0, 0, 0.07);
@@ -61,20 +63,13 @@
    DARK MODE TOKENS
    ═══════════════════════════════════════════════════════════════════════════ */
 .dark {
-  --bg-base: #0B0D12;
+  --bg-base: #0B0D12; /* Deep ink */
   --glow-1: rgba(59, 74, 107, 0.35);    /* muted steel blue, upper-left  */
   --glow-2: rgba(43, 74, 79, 0.30);     /* warm grey-teal, lower-right   */
   --bg: var(--bg-base);
 
   --text-primary: #FFFFFF;
   --text-secondary: #8A90A8;
-
-  /* Gold accent — dark mode (warm soft gold) */
-  --accent: #E9C46A;
-  --accent-soft: #F3DC9B;
-  --accent-deep: #C99A2E;
-  --accent-glow: rgba(233, 196, 106, 0.18);
-  --accent-text: #1A1405;
 
   --glass-bg: rgba(255, 255, 255, 0.08);
   --glass-blur: blur(24px) saturate(180%) brightness(1.05);
@@ -89,6 +84,15 @@
   --glass-shadow-outer: 0 20px 40px -12px rgba(0, 6, 30, 0.5);
   --glass-shadow-float: 0 12px 32px -8px rgba(0, 4, 20, 0.5);
   --glass-text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+
+  /* Droplet specific (dark mode) */
+  --droplet-bg: rgba(255, 255, 255, 0.06);
+  --droplet-border-bright: rgba(255, 255, 255, 0.25);
+  --droplet-border-dim: rgba(255, 255, 255, 0.02);
+  --droplet-highlight: rgba(255, 255, 255, 0.15);
+  --droplet-shadow-inner: inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  --droplet-shadow-outer: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+  --droplet-caustic: inset 0 -4px 10px rgba(255, 255, 255, 0.05);
 
   --bubble-bg: rgba(255, 255, 255, 0.10);
   --bubble-bg-active: rgba(255, 255, 255, 0.14);
@@ -342,55 +346,36 @@ body {
   .animate-glow-1,
   .animate-glow-2,
   .animate-float,
-  .animate-gold-glow,
-  .animate-float-shape-a,
-  .animate-float-shape-b {
+  .animate-cool-glow,
+  .animate-droplet-drift {
     animation: none;
   }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   GOLD GLOW + HERO SHAPE ANIMATIONS
+   DROPLET ANIMATIONS
    ═══════════════════════════════════════════════════════════════════════════ */
-@keyframes gold-glow-drift {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50%      { transform: translate(30px, -20px) scale(1.06); }
-}
-
 @keyframes cool-glow-drift {
   0%, 100% { transform: translate(0, 0) scale(1); }
   50%      { transform: translate(-25px, 15px) scale(1.04); }
 }
 
-@keyframes float-shape-a {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50%      { transform: translateY(-14px) rotate(6deg); }
+@keyframes droplet-morph {
+  0%, 100% { border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%; }
+  33%      { border-radius: 40% 60% 45% 55% / 60% 40% 50% 40%; }
+  66%      { border-radius: 50% 50% 60% 40% / 45% 55% 45% 60%; }
 }
 
-@keyframes float-shape-b {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50%      { transform: translateY(-10px) rotate(-5deg); }
+@keyframes droplet-drift {
+  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+  50%      { transform: translate(20px, -15px) rotate(5deg); }
 }
 
-@keyframes status-dot-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%      { opacity: 0.45; transform: scale(0.75); }
-}
-
-@keyframes scroll-cue-bounce {
-  0%, 100% { transform: translateY(0); opacity: 1; }
-  50%      { transform: translateY(4px); opacity: 0.6; }
-}
-
-.animate-gold-glow     { animation: gold-glow-drift 40s ease-in-out infinite; }
 .animate-cool-glow     { animation: cool-glow-drift 48s ease-in-out infinite; }
-.animate-float-shape-a { animation: float-shape-a 9s ease-in-out infinite; }
-.animate-float-shape-b { animation: float-shape-b 11s ease-in-out infinite; }
-.animate-status-pulse  { animation: status-dot-pulse 2.5s ease-in-out infinite; }
-.animate-scroll-cue    { animation: scroll-cue-bounce 1.8s ease-in-out infinite; }
+.animate-droplet-morph { animation: droplet-morph 14s ease-in-out infinite; }
+.animate-droplet-drift { animation: droplet-drift 18s ease-in-out infinite; }
 
 @media (max-width: 768px) {
-  .animate-gold-glow { animation-duration: 55s; }
   .animate-cool-glow { animation-duration: 65s; }
 }
 
