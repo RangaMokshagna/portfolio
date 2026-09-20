@@ -8,8 +8,8 @@ import { GlassCard } from "./GlassCard";
  */
 export function Contact() {
   return (
-    <section id="contact" className="px-6 section-padding flex flex-col min-h-[100svh]">
-      <div className="max-w-content mx-auto w-full">
+    <section id="contact" className="px-6 pt-[var(--section-pt)] pb-12 flex-1 flex flex-col items-center justify-start min-h-[700px]:justify-center">
+      <div className="max-w-content w-full">
         <ScrollReveal>
           <div data-scroll-target className="text-center mb-8">
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-3">

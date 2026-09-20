@@ -26,10 +26,13 @@ export default async function Home() {
         <About />
         <Projects initialRepos={repos} />
         <Skills />
-        <Contact />
       </main>
 
-      <Footer />
+      {/* Contact and Footer wrapped to perfectly fill one screen */}
+      <div className="flex flex-col min-h-[100dvh] min-h-[100svh]">
+        <Contact />
+        <Footer />
+      </div>
     </>
   );
 }
