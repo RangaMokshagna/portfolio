@@ -11,12 +11,14 @@ export function Contact() {
     <section id="contact" className="px-6 pt-24 pb-12 flex flex-col justify-center min-h-[calc(100svh-80px)]">
       <div className="max-w-content mx-auto w-full">
         <ScrollReveal>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-3 text-center">
-            Get in Touch
-          </h2>
-          <p className="text-[var(--text-secondary)] text-center mb-8 max-w-md mx-auto">
-            Open to opportunities, collaborations, or just a good conversation about data.
-          </p>
+          <div data-scroll-target className="text-center mb-8">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-3">
+              Get in Touch
+            </h2>
+            <p className="text-[var(--text-secondary)] max-w-md mx-auto">
+              Open to opportunities, collaborations, or just a good conversation about data.
+            </p>
+          </div>
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>

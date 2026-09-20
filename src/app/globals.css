@@ -114,10 +114,7 @@
    BASE STYLES
    ═══════════════════════════════════════════════════════════════════════════ */
 html {
-  scroll-behavior: smooth;
   overflow-x: hidden;
-  --nav-offset: 120px;
-  scroll-padding-top: var(--nav-offset);
 }
 
 body {
@@ -126,10 +123,6 @@ body {
   font-family: var(--font-sans);
   overflow-x: hidden;
   transition: background-color 0.4s ease, color 0.3s ease;
-}
-
-section[id] {
-  scroll-margin-top: var(--nav-offset);
 }
 
 @media (prefers-reduced-motion: reduce) {

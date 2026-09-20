@@ -65,13 +65,15 @@ export function Projects({ initialRepos }: ProjectsProps) {
   }, [initialRepos]);
 
   return (
-    <section id="projects" className="px-6 py-24 md:py-32">
+    <section id="projects" className="px-6 py-24 md:py-32 relative z-10">
       <div className="max-w-content mx-auto">
         {/* Section Header */}
         <ScrollReveal>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-4 text-center">
-            Featured Projects
-          </h2>
+          <div data-scroll-target className="mb-14 md:mb-20 text-center">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl">
+              Projects
+            </h2>
+          </div>
           <p className="text-[var(--text-secondary)] text-center mb-14 max-w-md mx-auto">
             End-to-end builds — from data collection to deployment
           </p>

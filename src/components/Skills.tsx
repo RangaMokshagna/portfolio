@@ -62,7 +62,7 @@ export function Skills() {
     <section id="skills" className="px-6 py-24 md:py-32">
       <div className="max-w-[960px] mx-auto">
         <ScrollReveal>
-          <div className="text-center mb-14">
+          <div data-scroll-target className="text-center mb-14">
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-3 text-[var(--text-primary)]">
               Skills
             </h2>

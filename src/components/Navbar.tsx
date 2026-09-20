@@ -59,12 +59,14 @@ export function Navbar() {
 
   const [activeSection, setActiveSection] = useState("home");
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [isScrolling, setIsScrolling] = useState(false);
   const scrolled = scrollY > 50;
 
   useEffect(() => {
     const ids = navItems.map((item) => item.id);
     const observer = new IntersectionObserver(
       (entries) => {
+        if (isScrolling) return; // Lock active tab during smooth scroll
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
@@ -72,14 +74,14 @@ export function Navbar() {
           setActiveSection(visible[0].target.id);
         }
       },
-      { threshold: [0.15, 0.4], rootMargin: "-120px 0px -50% 0px" }
+      { threshold: [0.15, 0.4], rootMargin: "-40% 0px -50% 0px" }
     );
     ids.forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
     return () => observer.disconnect();
-  }, []);
+  }, [isScrolling]);
 
   const activeIndex = navItems.findIndex((item) => item.id === activeSection);
   const targetIndex = hoveredIndex !== null ? hoveredIndex : activeIndex;
@@ -94,12 +96,25 @@ export function Navbar() {
 
   const handleTap = (index: number, id: string) => {
     setActiveSection(id);
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setIsScrolling(true);
+    
+    import("@/lib/scrollUtils").then((mod) => {
+      mod.scrollToSection(id);
+      
+      const checkEnd = () => {
+        setIsScrolling(false);
+        window.removeEventListener("scrollend", checkEnd);
+      };
+      
+      setTimeout(() => checkEnd(), 800); // fallback
+      window.addEventListener("scrollend", checkEnd, { once: true });
+    });
   };
 
   return (
     <header className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
       <motion.nav
+        id="main-nav"
         className="glass-pill border border-black/5 dark:border-white/10 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)]"
         animate={{
           paddingLeft: scrolled ? 10 : 16,

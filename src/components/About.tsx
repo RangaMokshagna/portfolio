@@ -13,11 +13,13 @@ import { profile } from "@/data/profile";
 export function About() {
   return (
     <section id="about" className="px-6 py-24 md:py-32">
-      <div className="max-w-content mx-auto">
+      <div className="max-w-[1200px] mx-auto">
         <ScrollReveal>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-12 md:mb-16 text-center">
-            About
-          </h2>
+          <div data-scroll-target className="mb-12 md:mb-16 text-center">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl">
+              About
+            </h2>
+          </div>
         </ScrollReveal>
 
         {/* Two-column layout on desktop; stacked on mobile with photo first */}

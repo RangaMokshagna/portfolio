@@ -59,8 +59,10 @@ export function Hero() {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-10 w-full sm:w-auto">
               
               {/* Primary CTA */}
-              <a
-                href="#projects"
+              <button
+                onClick={() => {
+                  import("@/lib/scrollUtils").then((mod) => mod.scrollToSection("projects"));
+                }}
                 className="relative inline-flex items-center justify-center overflow-hidden px-7 py-3 font-sans text-sm font-[600] rounded-full transition-all duration-200
                   bg-[rgba(11,13,18,0.92)] text-white dark:bg-[rgba(255,255,255,0.92)] dark:text-[#0B0D12] 
                   backdrop-blur-xl [-webkit-tap-highlight-color:transparent]
@@ -71,7 +73,7 @@ export function Hero() {
                 aria-label="View Projects"
               >
                 <span className="relative z-10">View Projects</span>
-              </a>
+              </button>
 
               {/* Secondary CTA */}
               <a
