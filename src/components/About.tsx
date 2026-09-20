@@ -12,7 +12,7 @@ import { profile } from "@/data/profile";
  */
 export function About() {
   return (
-    <section id="about" className="px-6 py-24 md:py-32">
+    <section id="about" className="px-6 section-padding">
       <div className="max-w-[1200px] mx-auto">
         <ScrollReveal>
           <div data-scroll-target className="mb-12 md:mb-16 text-center">

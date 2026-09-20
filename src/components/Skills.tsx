@@ -59,7 +59,7 @@ export function Skills() {
   ].filter(Boolean) as typeof skillGroups;
 
   return (
-    <section id="skills" className="px-6 py-24 md:py-32">
+    <section id="skills" className="px-6 section-padding">
       <div className="max-w-[960px] mx-auto">
         <ScrollReveal>
           <div data-scroll-target className="text-center mb-14">

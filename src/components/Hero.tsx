@@ -16,7 +16,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center px-6 pt-24 pb-16 overflow-hidden"
+      className="relative min-h-[100svh] flex items-center justify-center px-6 pt-[var(--section-pt)] pb-16 overflow-hidden"
     >
       {/* ── Refraction SVG Filter ── */}
       <svg className="absolute w-0 h-0" aria-hidden="true">

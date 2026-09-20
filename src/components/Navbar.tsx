@@ -3,6 +3,7 @@
 import {
   useState,
   useEffect,
+  useRef,
   type PointerEvent as ReactPointerEvent,
   type FocusEvent as ReactFocusEvent,
 } from "react";
@@ -60,7 +61,20 @@ export function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isScrolling, setIsScrolling] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
   const scrolled = scrollY > 50;
+
+  useEffect(() => {
+    if (!navRef.current) return;
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const height = entry.target.getBoundingClientRect().height;
+        document.documentElement.style.setProperty("--nav-h", `${height + 16}px`);
+      }
+    });
+    observer.observe(navRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const ids = navItems.map((item) => item.id);
@@ -112,7 +126,7 @@ export function Navbar() {
   };
 
   return (
-    <header className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
+    <header ref={navRef} className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
       <motion.nav
         id="main-nav"
         className="glass-pill border border-black/5 dark:border-white/10 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)]"

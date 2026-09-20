@@ -1,28 +1,20 @@
 export function scrollToSection(id: string) {
   const targetId = id.replace(/^#/, "");
-  const headingWrapper = document.querySelector(`section#${targetId} [data-scroll-target], section#${targetId}`);
-  if (!headingWrapper) return;
+  const section = document.getElementById(targetId);
+  if (!section) return;
 
-  const navElement = document.querySelector('header nav');
-  const navHeight = navElement ? navElement.getBoundingClientRect().height : 60;
-  const NAV_OFFSET = navHeight + 24;
-
-  const calculateTarget = () => {
-    return headingWrapper.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
-  };
-
-  const target = calculateTarget();
+  const target = section.getBoundingClientRect().top + window.scrollY;
   window.scrollTo({ top: target, behavior: "smooth" });
 
   let checkTimer: ReturnType<typeof setTimeout>;
 
   const checkScroll = () => {
     clearTimeout(checkTimer);
-    
-    // Check if we are close to the target
-    const currentTarget = calculateTarget();
-    if (Math.abs(window.scrollY - currentTarget) > 4) {
-      window.scrollTo({ top: currentTarget, behavior: "auto" }); // instant correction
+
+    // Check if the section top is close to 0 (the top of the viewport)
+    const rectTop = section.getBoundingClientRect().top;
+    if (Math.abs(rectTop) > 4) {
+      window.scrollTo({ top: section.getBoundingClientRect().top + window.scrollY, behavior: "auto" }); // instant correction
     }
     
     window.removeEventListener("scrollend", checkScroll);

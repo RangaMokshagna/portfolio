@@ -65,7 +65,7 @@ export function Projects({ initialRepos }: ProjectsProps) {
   }, [initialRepos]);
 
   return (
-    <section id="projects" className="px-6 py-24 md:py-32 relative z-10">
+    <section id="projects" className="px-6 section-padding relative z-10">
       <div className="max-w-content mx-auto">
         {/* Section Header */}
         <ScrollReveal>
