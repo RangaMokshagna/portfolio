@@ -138,6 +138,9 @@ export function Navbar() {
                         className="absolute inset-0 glass-bubble rounded-full pointer-events-none"
                         style={{
                           background: isOnActive ? "var(--bubble-bg-active)" : "var(--bubble-bg)",
+                          boxShadow: isOnActive
+                            ? "inset 0 1px 1px rgba(255,255,255,0.18), 0 0 8px 0 var(--accent-glow)"
+                            : undefined,
                         }}
                         transition={
                           reduced ? { duration: 0 } : { type: "spring", stiffness: 300, damping: 28 }

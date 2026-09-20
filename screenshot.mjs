@@ -2,32 +2,35 @@ import { chromium } from 'playwright';
 
 (async () => {
   const browser = await chromium.launch();
-  const page = await browser.newPage();
-  await page.goto('http://localhost:3000');
-  
-  await page.waitForTimeout(2000);
 
-  const contactTab = page.locator('button:has-text("Contact")');
-  await contactTab.hover();
-  await page.waitForTimeout(800);
-  
-  const nav = page.locator('nav');
-  await nav.screenshot({ path: 'C:/Users/jayav/.gemini/antigravity/brain/be7aeff6-58a4-43ef-9525-7a7123a8b30c/.user_uploaded/navbar-contact-hover.png' });
-  
-  await page.setViewportSize({ width: 1440, height: 900 });
-  await page.reload();
-  await page.waitForTimeout(1500);
-  await page.screenshot({ path: 'C:/Users/jayav/.gemini/antigravity/brain/be7aeff6-58a4-43ef-9525-7a7123a8b30c/.user_uploaded/hero-1440-new.png' });
+  // ─── Dark mode screenshots ───────────────────────────────────────────────
+  const darkPage = await browser.newPage();
+  await darkPage.goto('http://localhost:3000');
+  // Force dark mode via class (the app starts in dark by default)
+  await darkPage.waitForTimeout(2500); // wait for animations to settle
 
-  await page.setViewportSize({ width: 1024, height: 768 });
-  await page.reload();
-  await page.waitForTimeout(1500);
-  await page.screenshot({ path: 'C:/Users/jayav/.gemini/antigravity/brain/be7aeff6-58a4-43ef-9525-7a7123a8b30c/.user_uploaded/hero-1024-new.png' });
+  await darkPage.setViewportSize({ width: 1440, height: 900 });
+  await darkPage.screenshot({ path: 'C:/Users/jayav/.gemini/antigravity/brain/be7aeff6-58a4-43ef-9525-7a7123a8b30c/.user_uploaded/hero-dark-1440.png' });
 
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.reload();
-  await page.waitForTimeout(1500);
-  await page.screenshot({ path: 'C:/Users/jayav/.gemini/antigravity/brain/be7aeff6-58a4-43ef-9525-7a7123a8b30c/.user_uploaded/hero-390-new.png' });
+  await darkPage.setViewportSize({ width: 768, height: 1024 });
+  await darkPage.screenshot({ path: 'C:/Users/jayav/.gemini/antigravity/brain/be7aeff6-58a4-43ef-9525-7a7123a8b30c/.user_uploaded/hero-dark-768.png' });
+
+  await darkPage.setViewportSize({ width: 390, height: 844 });
+  await darkPage.screenshot({ path: 'C:/Users/jayav/.gemini/antigravity/brain/be7aeff6-58a4-43ef-9525-7a7123a8b30c/.user_uploaded/hero-dark-390.png' });
+
+  // ─── Light mode screenshots ──────────────────────────────────────────────
+  const lightPage = await browser.newPage();
+  await lightPage.goto('http://localhost:3000');
+  // Toggle light mode by clicking theme button
+  await lightPage.waitForTimeout(1000);
+  await lightPage.click('button[aria-label*="theme"], button[aria-label*="mode"], button[aria-label*="Toggle"]');
+  await lightPage.waitForTimeout(1500);
+
+  await lightPage.setViewportSize({ width: 1440, height: 900 });
+  await lightPage.screenshot({ path: 'C:/Users/jayav/.gemini/antigravity/brain/be7aeff6-58a4-43ef-9525-7a7123a8b30c/.user_uploaded/hero-light-1440.png' });
+
+  await lightPage.setViewportSize({ width: 390, height: 844 });
+  await lightPage.screenshot({ path: 'C:/Users/jayav/.gemini/antigravity/brain/be7aeff6-58a4-43ef-9525-7a7123a8b30c/.user_uploaded/hero-light-390.png' });
 
   await browser.close();
 })();
