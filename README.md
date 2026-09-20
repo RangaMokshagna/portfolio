@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ranga Mokshagna Jayavaram — Portfolio
+
+A personal portfolio website built with Next.js 16, TypeScript, Tailwind CSS v4, and Framer Motion.
+
+## Features
+
+- **Liquid glass design** — subtle glass surfaces on navbar, project cards, and skill chips with backdrop blur and mouse-following sheen
+- **Liquid lens** — floating SVG refraction lens that follows the cursor (Chromium) with graceful blur fallback (Safari/Firefox)
+- **Dark mode** — warm ivory light / deep ink dark with seamless toggle
+- **Smooth animations** — fade-up on scroll, card tilt on hover, navbar glass morphing
+- **Fully accessible** — semantic HTML, keyboard navigation, focus rings, `prefers-reduced-motion` support
+- **Responsive** — tested at 360px, 768px, and 1440px breakpoints
+- **SEO ready** — proper metadata, Open Graph tags, semantic structure
+
+## Tech Stack
+
+- [Next.js 16](https://nextjs.org/) (App Router)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS v4](https://tailwindcss.com/)
+- [Framer Motion](https://www.framer.com/motion/)
+- [next-themes](https://github.com/pacocoursey/next-themes)
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploy to Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Push this repo to GitHub
+2. Go to [vercel.com/new](https://vercel.com/new)
+3. Import the repository
+4. Vercel auto-detects Next.js — click **Deploy**
+5. Your site will be live at `your-project.vercel.app`
 
-## Learn More
+No environment variables or special configuration needed.
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+├── app/
+│   ├── fonts.ts          # Instrument Serif + Inter font config
+│   ├── globals.css       # Tailwind v4 theme tokens + animations
+│   ├── layout.tsx        # Root layout with SEO metadata
+│   └── page.tsx          # Single page assembling all sections
+├── components/
+│   ├── Navbar.tsx        # Glass pill navbar with scroll transition
+│   ├── Hero.tsx          # Name, tagline, CTAs, social links
+│   ├── About.tsx         # Bio + education card
+│   ├── Projects.tsx      # Project cards + detail modal
+│   ├── Skills.tsx        # Grouped glass skill chips
+│   ├── Certifications.tsx
+│   ├── Contact.tsx       # Contact card with email + socials
+│   ├── Footer.tsx
+│   ├── GlassCard.tsx     # Reusable glass surface component
+│   ├── LiquidLens.tsx    # Cursor-following refraction lens
+│   ├── BackgroundBlobs.tsx
+│   ├── ScrollReveal.tsx  # Fade-up animation wrapper
+│   ├── ThemeProvider.tsx
+│   └── ThemeToggle.tsx
+├── data/
+│   └── projects.ts       # ← Edit this file to update content
+├── hooks/
+│   ├── useMousePosition.ts
+│   ├── useReducedMotion.ts
+│   └── useScrollPosition.ts
+└── lib/
+    └── utils.ts          # cn() class merge helper
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Editing Content
 
-## Deploy on Vercel
+All project, skills, and certification data lives in [`src/data/projects.ts`](src/data/projects.ts). Edit that single file to update your portfolio content.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
