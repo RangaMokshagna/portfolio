@@ -5,8 +5,8 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="px-6 py-10 text-center border-t border-white/10 dark:border-white/5">
-      <div className="flex items-center justify-center gap-6 mb-4">
+    <footer className="px-6 py-6 text-center border-t border-black/10 dark:border-white/5">
+      <div className="flex items-center justify-center gap-6 mb-3">
         <a
           href="https://github.com/RangaMokshagna"
           target="_blank"
