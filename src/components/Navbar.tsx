@@ -72,7 +72,7 @@ export function Navbar() {
           setActiveSection(visible[0].target.id);
         }
       },
-      { threshold: [0.15, 0.4], rootMargin: "-80px 0px -40% 0px" }
+      { threshold: [0.15, 0.4], rootMargin: "-120px 0px -50% 0px" }
     );
     ids.forEach((id) => {
       const el = document.getElementById(id);
@@ -100,16 +100,23 @@ export function Navbar() {
   return (
     <header className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
       <motion.nav
-        className="glass glass-pill"
+        className="glass-pill border border-black/5 dark:border-white/10 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)]"
         animate={{
           paddingLeft: scrolled ? 10 : 16,
           paddingRight: scrolled ? 10 : 16,
           paddingTop: scrolled ? 6 : 10,
           paddingBottom: scrolled ? 6 : 10,
           scale: scrolled ? 0.97 : 1,
+          backgroundColor: scrolled 
+            ? "var(--nav-bg, rgba(255,255,255,0.85))"
+            : "var(--nav-bg, rgba(255,255,255,0.7))"
         }}
         transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 200, damping: 25 }}
-        style={{ transformOrigin: "center center" }}
+        style={{ 
+          transformOrigin: "center center",
+          backdropFilter: "blur(24px) saturate(180%)",
+          WebkitBackdropFilter: "blur(24px) saturate(180%)",
+        }}
         role="navigation"
         aria-label="Main navigation"
       >

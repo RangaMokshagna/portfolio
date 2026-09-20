@@ -48,6 +48,9 @@
   --droplet-shadow-outer: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
   --droplet-caustic: inset 0 -4px 10px rgba(255, 255, 255, 0.3);
 
+  /* Navbar */
+  --nav-bg: rgba(255, 255, 255, 0.85);
+
   /* Nav bubble (nested inside navbar — NO backdrop-filter) */
   --bubble-bg: rgba(0, 0, 0, 0.05);
   --bubble-bg-active: rgba(0, 0, 0, 0.07);
@@ -94,6 +97,9 @@
   --droplet-shadow-outer: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
   --droplet-caustic: inset 0 -4px 10px rgba(255, 255, 255, 0.05);
 
+  /* Navbar */
+  --nav-bg: rgba(20, 22, 28, 0.72);
+
   --bubble-bg: rgba(255, 255, 255, 0.10);
   --bubble-bg-active: rgba(255, 255, 255, 0.14);
   --bubble-border-bright: rgba(255, 255, 255, 0.22);
@@ -110,6 +116,8 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  --nav-offset: 120px;
+  scroll-padding-top: var(--nav-offset);
 }
 
 body {
@@ -118,6 +126,10 @@ body {
   font-family: var(--font-sans);
   overflow-x: hidden;
   transition: background-color 0.4s ease, color 0.3s ease;
+}
+
+section[id] {
+  scroll-margin-top: var(--nav-offset);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -8,7 +8,7 @@ import { GlassCard } from "./GlassCard";
  */
 export function Contact() {
   return (
-    <section id="contact" className="px-6 py-24 md:py-32">
+    <section id="contact" className="px-6 py-24 md:py-32 min-h-[100svh] flex flex-col justify-center">
       <div className="max-w-content mx-auto">
         <ScrollReveal>
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-4 text-center">
