@@ -52,11 +52,11 @@ export const projects: Project[] = [
   },
   {
     id: "climate-migration",
-    title: "Climate Migration Risk Predictor",
+    title: "ClimateQ – Climate-Driven Displacement Risk Predictor",
     summary:
       "ML-powered 4-level climate migration risk prediction across 194 countries",
     description:
-      "Merged 5 global datasets into 8,961 records across 194 countries using Python and xarray. Compared 7 ML models and picked XGBoost for 4-level climate migration risk prediction. Plotly/Folium maps and an interactive Power BI dashboard.",
+      "Merged 5 international datasets (NASA, UNHCR, EM-DAT, World Bank, Copernicus) into 8,961 records across 194 countries from 3 GB of NetCDF climate files; compared 7 ML models and chose XGBoost for 4 risk levels (Low, Medium, High, Extreme); built animated Plotly choropleth maps, Folium hotspot maps, and an interactive Power BI dashboard showing 120 years of global displacement trends.",
     metrics: [
       { label: "Countries", value: "194" },
       { label: "Records", value: "8,961" },
@@ -241,11 +241,15 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     category: "Data & AI",
-    skills: ["Machine Learning", "Data Analytics"],
+    skills: ["Pandas", "NumPy", "Scikit-learn", "Machine Learning", "Data Analytics"],
+  },
+  {
+    category: "Databases",
+    skills: ["MySQL", "MongoDB"],
   },
   {
     category: "Tools",
-    skills: ["Power BI", "Streamlit", "Git", "VS Code", "Jupyter"],
+    skills: ["Power BI", "Streamlit", "Git", "GitHub", "Docker", "VS Code", "Jupyter"],
   },
 ];
 

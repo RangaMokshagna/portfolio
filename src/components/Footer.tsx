@@ -1,3 +1,5 @@
+import { profile } from "@/data/profile";
+
 /**
  * Footer — copyright and direct profile links.
  */
@@ -8,7 +10,7 @@ export function Footer() {
     <footer className="px-6 py-6 text-center border-t border-black/10 dark:border-white/5">
       <div className="flex items-center justify-center gap-6 mb-3">
         <a
-          href="https://github.com/RangaMokshagna"
+          href={profile.github}
           target="_blank"
           rel="noopener noreferrer"
           className="text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
@@ -18,7 +20,7 @@ export function Footer() {
         </a>
         <span className="text-[var(--text-secondary)] opacity-40">•</span>
         <a
-          href="https://www.linkedin.com/in/ranga-mokshagna-jayavaram-3a1b33298/"
+          href={profile.linkedin}
           target="_blank"
           rel="noopener noreferrer"
           className="text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
@@ -28,15 +30,24 @@ export function Footer() {
         </a>
         <span className="text-[var(--text-secondary)] opacity-40">•</span>
         <a
-          href="mailto:jayavaramrangamokshagna@gmail.com"
+          href={`mailto:${profile.email}`}
           className="text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
-          aria-label="Send email to jayavaramrangamokshagna@gmail.com"
+          aria-label={`Send email to ${profile.email}`}
         >
           Email
         </a>
+        <span className="text-[var(--text-secondary)] opacity-40">•</span>
+        <a
+          href={profile.resume}
+          download="Ranga_Mokshagna_Resume.pdf"
+          className="text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+          aria-label="Download resume (PDF)"
+        >
+          Resume
+        </a>
       </div>
       <p className="text-xs text-[var(--text-secondary)]">
-        © {year} Ranga Mokshagna Jayavaram.
+        © {year} {profile.name}.
       </p>
     </footer>
   );

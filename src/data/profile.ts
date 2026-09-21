@@ -14,6 +14,7 @@ export interface ProfileData {
   location: string;
   github: string;
   linkedin: string;
+  resume: string;
   education: {
     institution: string;
     degree: string;
@@ -48,6 +49,7 @@ export const profile: ProfileData = {
   location: "Chennai, India",
   github: "https://github.com/RangaMokshagna",
   linkedin: "https://www.linkedin.com/in/ranga-mokshagna-jayavaram-3a1b33298/",
+  resume: "/Ranga_Mokshagna_Resume.pdf?v=1",
   education: {
     institution: "SRM Institute of Science and Technology",
     degree: "B.Tech Computer Science and Engineering",
