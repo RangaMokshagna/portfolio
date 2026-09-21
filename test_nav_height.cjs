@@ -12,7 +12,12 @@ const { chromium } = require('playwright');
     return document.documentElement.style.getPropertyValue('--nav-h');
   });
   
+  const navWidth = await page.evaluate(() => {
+    return document.getElementById('main-nav').getBoundingClientRect().width;
+  });
+  
   console.log(`Measured --nav-h: ${navH}`);
+  console.log(`Measured width: ${navWidth}px`);
   
   await browser.close();
 })();

@@ -19,7 +19,7 @@ export function ThemeToggle() {
 
   // SSR placeholder — prevents layout shift
   if (!mounted) {
-    return <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full" aria-hidden="true" />;
+    return <div className="w-10 h-10 rounded-full" aria-hidden="true" />;
   }
 
   const isDark = theme === "dark";
@@ -27,14 +27,14 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="w-9 h-9 sm:w-11 sm:h-11 flex items-center justify-center rounded-full
+      className="w-10 h-10 flex items-center justify-center rounded-full
         hover:bg-black/5 dark:hover:bg-white/10 transition-colors duration-200"
       aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
     >
       {isDark ? (
         /* Sun icon */
         <svg
-          className="w-[18px] h-[18px] sm:w-[22px] sm:h-[22px]"
+          className="w-5 h-5"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -49,7 +49,7 @@ export function ThemeToggle() {
       ) : (
         /* Moon icon */
         <svg
-          className="w-[18px] h-[18px] sm:w-[22px] sm:h-[22px]"
+          className="w-5 h-5"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
