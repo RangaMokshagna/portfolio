@@ -36,14 +36,7 @@ export function About() {
             {/* Bio Paragraph */}
             <ScrollReveal delay={0.2}>
               <p className="text-[var(--text-secondary)] text-base md:text-lg leading-relaxed">
-                I&apos;m a computer science student who genuinely enjoys turning messy data
-                into something useful. Most of my projects start the same way — I notice
-                a question nobody seems to be answering, pull together whatever datasets
-                I can find, and build an end-to-end pipeline that actually works outside
-                a notebook. I care about writing clean code, choosing the right model
-                (not just the fanciest one), and making results easy for anyone to
-                understand. Currently looking for entry-level data and ML roles where
-                I can keep learning while shipping real work.
+                I&apos;m a Computer Science Engineering student specializing in Big Data Analytics, with a strong interest in data, technology, and problem-solving. I enjoy working with real-world datasets, building machine learning solutions, and developing applications that turn complex data into meaningful insights. My experience includes Python, SQL, machine learning, data analysis, visualization, and full-stack project development. I&apos;m continuously learning new technologies and looking for opportunities to apply my skills to real-world challenges while growing as a technology professional.
               </p>
             </ScrollReveal>
 

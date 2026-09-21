@@ -43,7 +43,7 @@ export const profile: ProfileData = {
   firstName: "Ranga Mokshagna",
   lastName: "Jayavaram",
   role: "Data & ML Student",
-  tagline: "Data & ML student building things that actually run",
+  tagline: "Computer Science student building data-driven solutions that solve real-world problems",
   email: "jayavaramrangamokshagna@gmail.com",
   phone: "+91 99663 44659",
   location: "Chennai, India",
