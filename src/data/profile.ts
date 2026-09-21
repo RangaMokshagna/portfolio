@@ -10,6 +10,8 @@ export interface ProfileData {
   role: string;
   tagline: string;
   email: string;
+  phone: string;
+  location: string;
   github: string;
   linkedin: string;
   education: {
@@ -42,6 +44,8 @@ export const profile: ProfileData = {
   role: "Data & ML Student",
   tagline: "Data & ML student building things that actually run",
   email: "jayavaramrangamokshagna@gmail.com",
+  phone: "+91 99663 44659",
+  location: "Chennai, India",
   github: "https://github.com/RangaMokshagna",
   linkedin: "https://www.linkedin.com/in/ranga-mokshagna-jayavaram-3a1b33298/",
   education: {
