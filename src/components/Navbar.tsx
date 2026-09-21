@@ -130,7 +130,7 @@ export function Navbar() {
         id="main-nav"
         className={cn(
           "glass-pill border border-black/5 dark:border-white/10 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)]",
-          "px-3 py-2 sm:px-4 sm:py-3 transition-all duration-300"
+          "px-3 py-2 sm:px-3 sm:py-2.5 transition-all duration-300"
         )}
         animate={{
           scale: scrolled ? 0.97 : 1,
@@ -149,7 +149,7 @@ export function Navbar() {
       >
         <div className="relative flex items-center" onPointerLeave={handleNavPointerLeave}>
           
-          <div className="flex items-center gap-1 sm:gap-3">
+          <div className="flex items-center gap-1 sm:gap-1.5">
             <LayoutGroup>
               {navItems.map((item, i) => {
                 const isActive = activeSection === item.id;
@@ -159,7 +159,7 @@ export function Navbar() {
                 return (
                   <button
                     key={item.id}
-                    className="relative flex flex-col items-center justify-center gap-1 px-3 py-2 sm:px-5 sm:py-3 rounded-full outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50 cursor-pointer"
+                    className="relative flex flex-col items-center justify-center px-3 py-2 sm:px-4 sm:py-2.5 rounded-full outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50 cursor-pointer"
                     onPointerEnter={(e) => handlePointerEnter(e, i)}
                     onFocus={() => handleFocus(i)}
                     onPointerDown={() => handlePointerDown(i, item.id)}
@@ -182,10 +182,10 @@ export function Navbar() {
                       />
                     )}
                     
-                    <div className="relative z-[1] flex flex-col items-center justify-center pointer-events-none">
+                    <div className="relative z-[1] flex flex-col items-center justify-center pointer-events-none gap-0.5 sm:gap-1">
                       <svg
                         className={cn(
-                          "w-[22px] h-[22px] sm:w-[26px] sm:h-[26px] transition-colors duration-150",
+                          "w-[22px] h-[22px] sm:w-6 sm:h-6 transition-colors duration-150",
                           isActive || isHovered ? "text-[var(--text-primary)]" : "text-[var(--text-secondary)]"
                         )}
                         fill="none"
@@ -199,8 +199,8 @@ export function Navbar() {
                       </svg>
                       <span
                         className={cn(
-                          "text-[12px] sm:text-[14px] font-medium leading-none mt-0.5 sm:mt-1 transition-colors duration-150",
-                          isActive ? "block" : "hidden sm:block",
+                          "text-[12px] sm:text-[13px] leading-none transition-all duration-150",
+                          isActive ? "block font-semibold" : "hidden sm:block font-medium",
                           isActive || isHovered ? "text-[var(--text-primary)]" : "text-[var(--text-secondary)]"
                         )}
                       >
