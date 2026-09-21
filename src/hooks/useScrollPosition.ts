@@ -3,18 +3,27 @@
 import { useState, useEffect } from "react";
 
 /**
- * Tracks vertical scroll position.
- * Uses passive event listener for performance.
- * Primarily used for the navbar glass transition.
+ * Tracks if the vertical scroll position is past a threshold.
+ * Prevents per-pixel React state updates.
  */
-export function useScrollPosition(): number {
-  const [scrollY, setScrollY] = useState(0);
+export function useScrolledState(threshold = 50): boolean {
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handler = () => setScrollY(window.scrollY);
+    let lastState = window.scrollY > threshold;
+    setScrolled(lastState);
+
+    const handler = () => {
+      const isScrolled = window.scrollY > threshold;
+      if (isScrolled !== lastState) {
+        lastState = isScrolled;
+        setScrolled(isScrolled);
+      }
+    };
+    
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
-  }, []);
+  }, [threshold]);
 
-  return scrollY;
+  return scrolled;
 }

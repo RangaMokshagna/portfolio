@@ -10,7 +10,7 @@ import {
 import { motion, LayoutGroup } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "./ThemeToggle";
-import { useScrollPosition } from "@/hooks/useScrollPosition";
+import { useScrolledState } from "@/hooks/useScrollPosition";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -55,14 +55,13 @@ const navItems = [
 ];
 
 export function Navbar() {
-  const scrollY = useScrollPosition();
+  const scrolled = useScrolledState(50);
   const reduced = useReducedMotion();
 
   const [activeSection, setActiveSection] = useState("home");
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isScrolling, setIsScrolling] = useState(false);
   const navRef = useRef<HTMLElement>(null);
-  const scrolled = scrollY > 50;
 
   useEffect(() => {
     if (!navRef.current) return;
@@ -80,7 +79,7 @@ export function Navbar() {
     const ids = navItems.map((item) => item.id);
     const observer = new IntersectionObserver(
       (entries) => {
-        if (isScrolling) return; // Lock active tab during smooth scroll
+        if (isScrolling) return;
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
@@ -88,7 +87,7 @@ export function Navbar() {
           setActiveSection(visible[0].target.id);
         }
       },
-      { threshold: [0.15, 0.4], rootMargin: "-40% 0px -50% 0px" }
+      { rootMargin: "-35% 0px -55% 0px" }
     );
     ids.forEach((id) => {
       const el = document.getElementById(id);
@@ -108,7 +107,7 @@ export function Navbar() {
   const handleNavPointerLeave = () => setHoveredIndex(null);
   const handleFocus = (index: number) => setHoveredIndex(index);
 
-  const handleTap = (index: number, id: string) => {
+  const handlePointerDown = (index: number, id: string) => {
     setActiveSection(id);
     setIsScrolling(true);
     
@@ -129,12 +128,11 @@ export function Navbar() {
     <header ref={navRef} className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
       <motion.nav
         id="main-nav"
-        className="glass-pill border border-black/5 dark:border-white/10 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)]"
+        className={cn(
+          "glass-pill border border-black/5 dark:border-white/10 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)]",
+          "px-3 py-2 sm:px-4 sm:py-3 transition-all duration-300"
+        )}
         animate={{
-          paddingLeft: scrolled ? 10 : 16,
-          paddingRight: scrolled ? 10 : 16,
-          paddingTop: scrolled ? 6 : 10,
-          paddingBottom: scrolled ? 6 : 10,
           scale: scrolled ? 0.97 : 1,
           backgroundColor: scrolled 
             ? "var(--nav-bg, rgba(255,255,255,0.85))"
@@ -151,8 +149,7 @@ export function Navbar() {
       >
         <div className="relative flex items-center" onPointerLeave={handleNavPointerLeave}>
           
-          {/* Tab list wrapper isolated from divider and theme toggle */}
-          <div className="flex items-center">
+          <div className="flex items-center gap-1 sm:gap-3">
             <LayoutGroup>
               {navItems.map((item, i) => {
                 const isActive = activeSection === item.id;
@@ -162,10 +159,10 @@ export function Navbar() {
                 return (
                   <button
                     key={item.id}
-                    className="relative flex flex-col items-center justify-center gap-1 px-3 py-2 md:px-4 rounded-full outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50 cursor-pointer"
+                    className="relative flex flex-col items-center justify-center gap-1 px-3 py-2 sm:px-5 sm:py-3 rounded-full outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50 cursor-pointer"
                     onPointerEnter={(e) => handlePointerEnter(e, i)}
                     onFocus={() => handleFocus(i)}
-                    onClick={() => handleTap(i, item.id)}
+                    onPointerDown={() => handlePointerDown(i, item.id)}
                     aria-current={isActive ? "page" : undefined}
                   >
                     {showBubble && (
@@ -179,17 +176,16 @@ export function Navbar() {
                             : undefined,
                         }}
                         transition={
-                          reduced ? { duration: 0 } : { type: "spring", stiffness: 300, damping: 28 }
+                          reduced ? { duration: 0 } : { type: "spring", stiffness: 500, damping: 38, mass: 0.8 }
                         }
                         aria-hidden="true"
                       />
                     )}
                     
-                    {/* Content wrapper with z-index above bubble */}
                     <div className="relative z-[1] flex flex-col items-center justify-center pointer-events-none">
                       <svg
                         className={cn(
-                          "w-[18px] h-[18px] md:w-5 md:h-5 transition-colors duration-150",
+                          "w-[22px] h-[22px] sm:w-[26px] sm:h-[26px] transition-colors duration-150",
                           isActive || isHovered ? "text-[var(--text-primary)]" : "text-[var(--text-secondary)]"
                         )}
                         fill="none"
@@ -203,7 +199,8 @@ export function Navbar() {
                       </svg>
                       <span
                         className={cn(
-                          "hidden md:block text-[10px] font-medium leading-none mt-0.5 transition-colors duration-150",
+                          "text-[12px] sm:text-[14px] font-medium leading-none mt-0.5 sm:mt-1 transition-colors duration-150",
+                          isActive ? "block" : "hidden sm:block",
                           isActive || isHovered ? "text-[var(--text-primary)]" : "text-[var(--text-secondary)]"
                         )}
                       >
@@ -216,10 +213,8 @@ export function Navbar() {
             </LayoutGroup>
           </div>
 
-          {/* Divider */}
-          <div className="w-px h-6 bg-[var(--glass-border-dim)] mx-2" />
+          <div className="w-px h-6 sm:h-8 bg-[var(--glass-border-dim)] mx-2 sm:mx-3" />
 
-          {/* Theme toggle */}
           <ThemeToggle />
         </div>
       </motion.nav>
