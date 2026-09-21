@@ -3,10 +3,8 @@
 import { useEffect, useState } from "react";
 import { ScrollReveal } from "./ScrollReveal";
 import { profile } from "@/data/profile";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 export function Hero() {
-  const reduced = useReducedMotion();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -18,14 +16,6 @@ export function Hero() {
       id="home"
       className="relative min-h-[100svh] flex items-center justify-center px-6 pt-[var(--section-pt)] pb-16 overflow-hidden"
     >
-      {/* ── Refraction SVG Filter ── */}
-      <svg className="absolute w-0 h-0" aria-hidden="true">
-        <filter id="droplet-refraction" x="-20%" y="-20%" width="140%" height="140%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3" result="noise" />
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="14" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-      </svg>
-
       {/* ── Ambient Background Glow ── */}
       <div
         aria-hidden="true"
@@ -115,8 +105,8 @@ export function Hero() {
           </ScrollReveal>
         </div>
 
-        {/* ── Right Column: The Visual (Giant Text + Droplet) ── */}
-        <div className="w-full lg:w-[45%] flex items-center justify-center lg:justify-end shrink-0 relative mt-12 lg:mt-0">
+        {/* ── Right Column: The Visual (Giant Text) ── */}
+        <div className="w-full lg:w-[45%] h-[220px] sm:h-[280px] lg:h-[350px] flex items-center justify-center lg:justify-end shrink-0 relative mt-12 lg:mt-0">
           
           {/* Giant Word (Backdrop) */}
           <div 
@@ -133,52 +123,7 @@ export function Hero() {
             DATA<br/>&amp; ML
           </div>
 
-          {/* Droplet (Foreground Lens) */}
-          <div 
-            className="relative z-10 w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] lg:w-[350px] lg:h-[350px] pointer-events-none transition-all duration-1000"
-            style={{
-              opacity: mounted ? 1 : 0,
-              transform: mounted ? "scale(1)" : "scale(0.92)",
-            }}
-          >
-            {/* The Droplet Shape */}
-            <div
-              className={`absolute inset-0 ${reduced ? '' : 'animate-droplet-morph animate-droplet-drift'}`}
-              style={{
-                borderRadius: "60% 40% 55% 45% / 50% 60% 40% 50%", // Base shape for reduced motion
-                background: "var(--droplet-bg)",
-                backdropFilter: "url(#droplet-refraction) blur(10px) saturate(160%)",
-                WebkitBackdropFilter: "blur(10px) saturate(160%)", // Fallback for Safari/others
-                boxShadow: "var(--droplet-shadow-inner), var(--droplet-shadow-outer)",
-              }}
-            >
-              {/* Gradient Rim */}
-              <div
-                className="absolute inset-0 rounded-[inherit] pointer-events-none p-[1px]"
-                style={{
-                  background: "linear-gradient(135deg, var(--droplet-border-bright) 0%, var(--droplet-border-dim) 100%)",
-                  WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                  WebkitMaskComposite: "xor",
-                  mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                  maskComposite: "exclude",
-                }}
-              />
-              
-              {/* Specular Highlight (Top curve) */}
-              <div
-                className="absolute top-[8%] left-[12%] right-[12%] h-[35%] rounded-[inherit] pointer-events-none"
-                style={{
-                  background: "linear-gradient(180deg, var(--droplet-highlight) 0%, transparent 100%)",
-                }}
-              />
 
-              {/* Bottom Caustic */}
-              <div
-                className="absolute inset-0 rounded-[inherit] pointer-events-none"
-                style={{ boxShadow: "var(--droplet-caustic)" }}
-              />
-            </div>
-          </div>
         </div>
       </div>
     </section>
